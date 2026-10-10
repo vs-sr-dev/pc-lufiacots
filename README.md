@@ -25,8 +25,18 @@ its secure area decrypted, placed in `rom/`.
 
 ## Playing it
 
-Not yet: the cartridge and its code are read and the plan is written
-(`docs/06-attack-plan.md`); the recompiler and the runtime come next.
+Not yet for players: the recompiled game runs from the boot through the
+opening and the title into its first dungeon, headless and checked
+against melonDS; the picture and the sound are next, by eye and by ear.
+To try it (MSYS2's clang, CMake, Ninja and SDL3; `C:\msys64\mingw64\bin`
+on PATH, at run time too):
+
+```sh
+ROM="rom/Lufia - Curse of the Sinistrals (USA).nds"
+python -m ndskit.recomp "$ROM" --out build/recomp        # about 10 minutes
+cmake -S build/recomp -B build/recomp/b -G Ninja -DCMAKE_CXX_COMPILER=clang++ && ninja -C build/recomp/b
+build/recomp/b/ndsrun "$ROM" --window --save-size 65536 --out build/play
+```
 
 ## Layout
 
@@ -86,6 +96,15 @@ CodeWarrior's Thumb switches, a newer ARM7's halfword tables and Thumb's
 long branches, checked on pc-moon, pc-nostalgia and three more
 cartridges.
 
+Session 2: recompiled and running. Both programs and the twenty overlays
+recompiled (about 25 000 functions; the self-test's 137 231 vectors pass,
+recompiled and interpreted); the compressed program found at the boot;
+the stacked overlays told apart function by function; the anti-piracy
+module's self-decrypting code run in ndskit's new interpreter. The
+opening plays headless to the title, where main RAM agrees with
+melonDS's but for a stream's buffer; the prologue leads into Soma Temple.
+The title's two 3D screens (display capture) now draw right.
+
 ## Documentation
 
 * [00-sessions.md](docs/00-sessions.md) — what each session did
@@ -96,7 +115,9 @@ cartridges.
 * [05-open-questions.md](docs/05-open-questions.md) — what is not known yet
 * [06-attack-plan.md](docs/06-attack-plan.md) — what is new against Moon and Nostalgia, a better Lufia on PC, the phases, the oracle's route
 * [07-next-session.md](docs/07-next-session.md) — the next session's list
+* [09-recompiler.md](docs/09-recompiler.md) — the modules, what the self-test found
 * [10-ndskit.md](docs/10-ndskit.md) — what this port gave ndskit
+* [11-runtime.md](docs/11-runtime.md) — the boot, overlays per function, the interpreter, against melonDS, display capture
 
 ## Licence
 

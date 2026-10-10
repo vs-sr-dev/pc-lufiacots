@@ -31,10 +31,20 @@ is playable.
 `D:\Homebrew6\ndskit` is at `6eda9f5`; pc-moon's submodule bumped in its
 commit `0dfb858`, pc-nostalgia's in `0fa3b4b` (both local).
 
-What the kit still lacks for this game (`06-attack-plan.md`): an ARM
-interpreter in the runtime for the anti-piracy's self-modifying code;
-the ARM9's module found when the program is loaded compressed; overlays'
-residency by overlap, across load addresses; each overlay discovered with
-the overlays below it in its stack; the voice streams heard against
-melonDS. Its README's known gaps (Huffman, Thumb switches, halfword
-tables) and checks are to update at the publication.
+## Session 2
+
+| Commit | What | Checked by |
+|---|---|---|
+| `08ba0d2` | **an ARM interpreter in the runtime** (`runtime/interp.cpp`, armemu's semantics in C++: code no module holds runs from memory until it returns to its caller, its calls to entries run recompiled; a call to a non-entry is interpreted instead of stopping; a function the emitter cannot take becomes a call to it; the self-test's `--interp`); **overlays told apart function by function** (each function's extent, its code and folded literal pools, with its crc32; a call into the overlays' area goes to the function whose bytes are in memory as built; every store marks its 256-byte page; the slots, the cartridge's epoch, the samples and the first instructions gone); a compressed program's stored image as a segment of kind "loaded", which the boot matches; the emitter's Thumb `add pc, rB` read unaligned (switches at 2 mod 4 went two bytes short; the instruction test has the switch at both alignments); discovery: a known word pushed alone and popped into pc is a jump there (CodeWarrior's Thumb thunks into ARM); `--auto` keeps a vector only if it runs discovered code, and leaves out segments outside the test's memory (the ARM7's VRAM autoload); display capture's source A is engine A's graphics whatever its display shows; VRAM in the run's dump | this game: 137 231 vectors, no failure, recompiled and interpreted; the opening, the title (12 482 bytes of main RAM apart from melonDS, 12 288 of them a stream's buffer) and the route into Soma Temple to frame 22 000; pc-moon: 81 587 vectors both ways, 74 bytes at frame 464, its route to frame 3 644; pc-nostalgia: 115 425 vectors both ways, its route into the first dungeon, 2 047 bytes apart as before; discovery on the five cartridges, both CPUs and their overlays: the lists identical, conflicts unchanged |
+| `720c636` | the overlay log tells each change of hands (a module found takes those whose area meets its own out of the found list) | pc-nostalgia's route: overlays 0, 1, and 0 again at 2 792, as the slots told; this game's route: 19, 4, 1, 4 again, no repetition |
+
+`D:\Homebrew6\ndskit` is at `720c636`; pc-moon's submodule bumped in its
+commit `87b8e13`, pc-nostalgia's in `9a97fd8` (both local).
+
+What the kit still lacks for this game: discovery of the small methods
+reached through pointers that the interpreter now runs; each overlay
+discovered with the overlays below it in its stack (not needed so far:
+the per-function residency follows the stacks as they are); the voice
+streams heard against melonDS. Its README's known gaps (Huffman, Thumb
+switches, halfword tables, now the interpreter and the overlays) and
+checks are to update at the publication.

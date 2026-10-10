@@ -61,3 +61,38 @@
   residency by overlap for the stacked overlays, the ARM7's VRAM segment,
   the voice streams; on PC the 3D at the screen's resolution, 60 by
   interpolation, the minimap as a panel, an action RPG's pad layout.
+
+## Session 2 (2026-10-10) — recompiled, booted, through the anti-piracy to the first dungeon
+
+* **The recompiler** (`09-recompiler.md`): both programs and the twenty
+  overlays to C++, 23 modules, about 25 000 functions; one function, an
+  overlay-0 initialiser whose bytes are encrypted as they lie, left to the
+  interpreter. The self-test with this game's functions (the program, the
+  ARM7, overlays 1 and 14) and ndskit's instruction test: **137 231
+  vectors, no failure**, recompiled and interpreted. It found the
+  emitter's Thumb switch two bytes short when its `add pc` lies at 2 mod
+  4 (the game's first stop, frame 509) and CodeWarrior's Thumb thunks into
+  ARM taken for returns.
+* **The runtime** (`11-runtime.md`): the compressed ARM9 found at the boot
+  by its stored image and decompressed by its own crt0; **overlays told
+  apart function by function** (each function's bytes checked against
+  its module, stores marking the pages they write), which follows
+  overlays stacked at five bases, overlay 1 and 4 resident together, and
+  overlay 0 loaded and decrypting itself fourteen times along the route; **an ARM
+  interpreter** for code no module holds, which runs the **anti-piracy**
+  module's decrypted code (its three entries from 0x02096004) and some 25
+  small functions discovery misses.
+* **Against melonDS**: the opening plays headless to the title; at the
+  title (SDK VBlank 15 813) main RAM differs by 12 482 bytes, 12 288 of
+  them the voice stream's ring buffer: the anti-piracy's checks pass as
+  on melonDS, as far as memory shows. With A pressed every 60 frames the
+  run goes through NEW GAME, the prologue on the Excelion and into
+  **Soma Temple 1F**, and on to frame 22 000 without a stop. Headless
+  speed: 5.5 to 10 times the DS.
+* **The picture**: the opening's 3D, busts, boxes and credits right at
+  once; the title was noise until display capture took engine A's
+  graphics rather than its displayed VRAM bank (the title draws both
+  screens in 3D, in alternate frames, through capture).
+* **ndskit gained** (`10-ndskit.md`): the interpreter, per-function
+  overlay residency, the loaded-image segment, the fixes above, VRAM in
+  the run's dump.

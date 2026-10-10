@@ -80,6 +80,17 @@ cartridge's (the rest decrypted). *Inferred*: it is an anti-piracy
 library (the AP of the scene's patch lists), checking the cartridge and
 the code, which a flash cartridge or a patched program fails.
 
+**On ndskit's runtime** (session 2, `11-runtime.md`) the overlay is
+loaded 14 times on the way from a new cartridge into Soma Temple (frames
+501 to 18 803), and each time its initialisers decrypt it again. An
+initialiser runs recompiled while its bytes are as stored and
+interpreted once the decryption has touched them (0x02175C8C, the last: *inferred*, its extent meeting a block decrypted before it)
+or when the emitter could not take it (0x021757D4, whose discovered body
+runs into encrypted bytes); everything they decrypt runs in the
+interpreter, as do the three entries
+the program calls (first at frames 501, 515 and 518). At the title, main
+RAM agrees with melonDS's but for a stream's buffer and about 200 bytes.
+
 ### The frame
 
 **30 frames a second**, measured in melonDS from pairs of savestates two

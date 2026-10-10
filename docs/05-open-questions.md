@@ -7,8 +7,12 @@ What is not known yet, with where to look.
 * **What it checks**, and where its answer goes: the three entries the
   program calls (0x021744E0, 0x02174558, 0x021745D0, from 0x02096004;
   the first given a function pointer, 0x02095B6C, its result compared
-  with an argument's complement). To read in the interpreter's trace
-  once the runtime runs it, and against melonDS's memory after it ran.
+  with an argument's complement). Session 2: the runtime runs them
+  interpreted (frames 501, 515, 518 of a run from a new cartridge), and at
+  the title main RAM is melonDS's but for a stream's buffer and ~200
+  bytes: nothing shows a failed check. What they read (the cartridge's
+  answers, the code's bytes, the backup) is still to trace in the
+  interpreter, and a sabotage would show later in play.
 * **What 0x02096004 is**, the program's function that calls it (it also
   clears engine B's layers in DISPCNT_B): when in the game it runs.
 * **The backup probe**: at the boot the game identifies its backup as a
@@ -25,8 +29,11 @@ What is not known yet, with where to look.
 
 * **Overlay 1 under overlay 4**: in the dungeon overlay 4 lies over the
   middle of overlay 1 (53.45% of 1's bytes left). Does the game call
-  overlay 1's code around it? The runtime's dispatch will say (a call
-  into overlay 1's remaining ranges while 4 is resident).
+  overlay 1's code around it? Session 2: from frame 18 326 of the route
+  (the prologue) the runtime dispatches into overlay 1's functions, with
+  overlay 4 loaded since 9 018 and its functions still found in memory
+  (*inferred* from the log: misses are not logged). The per-function
+  residency follows either way.
 * **Which overlay is which**, beyond 0 (the anti-piracy), 19 (the
   opening), 4 (the title and the field), 1 (the dungeon or the
   prologue): the towns, the menus, the bosses' (9-18), 5 and 6.
@@ -54,7 +61,8 @@ What is not known yet, with where to look.
   run (by member UID?).
 * **The threads** of both CPUs: to list from the runtime's trace.
 * **Headless speed**: Nostalgia runs headless at 15 times the DS, Moon at
-  210; Lufia's to measure as soon as it boots.
+  210; Lufia 10 times through the opening, 5.5 with pictures on (session
+  2). Where the time goes is to profile.
 
 ## The oracle
 
