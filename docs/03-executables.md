@@ -91,6 +91,27 @@ interpreter, as do the three entries
 the program calls (first at frames 501, 515 and 518). At the title, main
 RAM agrees with melonDS's but for a stream's buffer and about 200 bytes.
 
+**What a failed check does** (read in session 2). 0x02096004 is the
+loading of an area, run at every transition (14 times from the boot into
+Soma Temple). It loads overlay 0 again (`bl 0x02107958` with 0, 0), so the
+module decrypts itself anew, and calls its three entries in turn, each
+with the callback 0x02095B6C and two zeros. The callback calls its
+argument when it is not zero and returns its complement; the caller
+compares the module's result with `~0`, and **when they are equal it
+allocates 0x8000 bytes (0x020140A8, the heap's `new`) and drops the
+pointer**: 32 KiB lost per failed check, up to 96 KiB per transition,
+until the heap runs out (0x020140A8 then sets 0x02154A58 and calls
+0x02111E5C). This is the "freeze after a few area changes, cleared by
+saving and resetting" that players of patched copies on flash cartridges
+report (the Tanbel Mines, with many transitions, cannot be passed).
+
+On ndskit's runtime, over all 14 area loads of the route from a new
+cartridge into Soma Temple, the callback is never called and the
+allocation never made: every check passes (a temporary trace of the
+calls into 0x02095B6C and of 0x020140A8 from 0x020960B0, 0x020961CC and
+0x020965D4). melonDS's memory agrees: 13 transitions by the title, and
+its heap as the run's but for ~200 bytes.
+
 ### The frame
 
 **30 frames a second**, measured in melonDS from pairs of savestates two

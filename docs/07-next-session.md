@@ -10,7 +10,10 @@ followed the opening, the title and the prologue into Soma Temple 1F
    (`00-sessions.md`). On through Soma Temple and the first town: a
    boss, the menus, the IP skills, a cutscene's voices; anything off goes
    into `12-picture.md` and `13-sound.md`. The anti-piracy's sabotage, if
-   its checks failed, would show here (a door, a boss).
+   its checks failed, would leak 32 KiB at each failed check on every area
+   change (`03-executables.md`): the Tanbel Mines, where patched copies
+   freeze after the first minecart room, are the test. The user played
+   the gameplay loop (monsters, drops, a chest, the menu): all right.
 2. **The route against melonDS past the title**: the prologue's presses
    timed as the oracle's (read the frames from the states,
    `--peek 027FFC3C:4`, and the pad's state at 0x021587B4), so that the

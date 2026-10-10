@@ -12,7 +12,10 @@ What is not known yet, with where to look.
   the title main RAM is melonDS's but for a stream's buffer and ~200
   bytes: nothing shows a failed check. What they read (the cartridge's
   answers, the code's bytes, the backup) is still to trace in the
-  interpreter, and a sabotage would show later in play.
+  interpreter, and a sabotage would show later in play. Its sabotage
+  is now read (`03-executables.md`: 32 KiB leaked per failed check at each
+  area load), and on the route every check passes; what the module reads
+  to decide is still to trace.
 * **What 0x02096004 is**, the program's function that calls it (it also
   clears engine B's layers in DISPCNT_B): when in the game it runs.
 * **The backup probe**: at the boot the game identifies its backup as a
