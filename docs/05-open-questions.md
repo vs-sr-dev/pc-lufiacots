@@ -14,8 +14,9 @@ What is not known yet, with where to look.
   answers, the code's bytes, the backup) is still to trace in the
   interpreter, and a sabotage would show later in play. Its sabotage
   is now read (`03-executables.md`: 32 KiB leaked per failed check at each
-  area load), and on the route every check passes; what the module reads
-  to decide is still to trace.
+  area load), and on the route every check passes; what it reads is
+  traced (the DSi's SCFG, ROM reads at 0x8000 timed by the timers, the
+  owner's settings), how it judges them is still to read.
 * **What 0x02096004 is**, the program's function that calls it (it also
   clears engine B's layers in DISPCNT_B): when in the game it runs.
 * **The backup probe**: at the boot the game identifies its backup as a

@@ -112,6 +112,33 @@ calls into 0x02095B6C and of 0x020140A8 from 0x020960B0, 0x020961CC and
 0x020965D4). melonDS's memory agrees: 13 transitions by the title, and
 its heap as the run's but for ~200 bytes.
 
+**What the checks read** (session 2, a temporary trace of the
+interpreter's loads outside overlay 0 and of the recompiled functions it
+calls, over the first two area loads; besides that, each check works on
+its own stack in the DTCM):
+
+* the first (0x021744E0): **0x04004000**, the DSi's SCFG register (on a
+  DS, open bus: a DSi or a DSi-mode loader would answer); the cartridge
+  header's copy at 0x027FFE00; then **the cartridge itself through the
+  card registers**: six reads of 0x200 bytes at ROM 0x8000, 0x8000,
+  0x8000, 0x8200, 0x8000, 0x8400 (the program's first bytes past the
+  secure area), with **795 reads of the timers** (0x04000100) around them
+  and the interrupt registers read: the reads' content and *how long
+  they take*, *inferred*. It calls five program functions once each
+  (0x021047A8, 0x02104818, 0x02105A38, 0x0210F494, 0x0210F4EC: *inferred*
+  the card's lock and unlock and the interrupts' disabling, by their
+  places in the SDK's code);
+* the second (0x02174558): seven words of the program's code near
+  0x02111C00 and a call of 0x02111C50 (the SDK's `OS_GetOwnerInfo`,
+  which reads the firmware's user settings at 0x02FFFC80), and one ITCM
+  function (0x01FFEBB4);
+* the third (0x021745D0): nothing outside its stack.
+
+The same at the second load. A flash cartridge differs in what its loader
+leaves in memory (the SDK's card routines patched to read the SD card)
+and in how its hardware answers the ROM commands and how fast; which of
+these this module holds against it is to read in its decrypted code.
+
 ### The frame
 
 **30 frames a second**, measured in melonDS from pairs of savestates two
