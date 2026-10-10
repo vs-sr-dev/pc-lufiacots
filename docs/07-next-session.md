@@ -5,14 +5,12 @@ ndskit's runtime, ran the anti-piracy module in the new interpreter and
 followed the opening, the title and the prologue into Soma Temple 1F
 (`00-sessions.md`, `09-recompiler.md`, `11-runtime.md`). Next:
 
-1. **The user's eyes and ears**: the window
-   (`build/recomp/b/ndsrun "$ROM" --window --save-size 65536 --out
-   build/play`, in the background, MSYS2 on PATH), from a new cartridge:
-   the opening, the title, NEW GAME, the prologue, Soma Temple. What is
-   wrong in the picture or the sound goes into `12-picture.md` and
-   `13-sound.md` (the voices are streams the ARM9 refills from the
-   cartridge: check them by ear first; the cartridge answers at once,
-   a known gap).
+1. **Longer play**: the user played the window from a new cartridge for
+   nearly nine minutes and found nothing wrong, picture or sound
+   (`00-sessions.md`). On through Soma Temple and the first town: a
+   boss, the menus, the IP skills, a cutscene's voices; anything off goes
+   into `12-picture.md` and `13-sound.md`. The anti-piracy's sabotage, if
+   its checks failed, would show here (a door, a boss).
 2. **The route against melonDS past the title**: the prologue's presses
    timed as the oracle's (read the frames from the states,
    `--peek 027FFC3C:4`, and the pad's state at 0x021587B4), so that the

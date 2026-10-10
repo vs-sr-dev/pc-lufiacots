@@ -96,3 +96,9 @@
 * **ndskit gained** (`10-ndskit.md`): the interpreter, per-function
   overlay residency, the loaded-image segment, the fixes above, VRAM in
   the run's dump.
+* **The user's eyes and ears**: in the window from a new cartridge,
+  8 min 46 s of play (31 480 frames, through the opening and on into the
+  game): "everything works", nothing to report; the sound's
+  Speakers/Headphones option heard to change the mix even on the PC's
+  speakers. The audio queue never ran dry nor was cut (playback ratio
+  1.0003); the game wrote its backup memory.
