@@ -5,9 +5,11 @@ A native PC port, in the making, of **Lufia: Curse of the Sinistrals**
 © Taito; the North American release licensed to and published by
 Natsume), the action-RPG remake in 3D of the SNES's *Lufia II*: Maxim,
 Selena, Guy, the Sinistrals, Doom Island. Both of the cartridge's
-programs are to be recompiled statically to C++ and run on a runtime that
-replaces the DS's hardware, the 3D drawn by the PC's GPU at the window's
-resolution.
+programs and its twenty overlays are recompiled statically to C++ and run
+on a runtime that replaces the DS's hardware, the 3D drawn by the PC's
+GPU at the window's resolution; the anti-piracy module, which decrypts
+its own code at every area change, runs in the runtime's interpreter and
+passes its checks as a genuine cartridge does.
 
 It is the third game of [ndskit](https://github.com/vs-sr-dev/ndskit), the game-agnostic DS toolkit born
 with [pc-moon](https://github.com/vs-sr-dev/pc-moon) and proven on
@@ -25,18 +27,28 @@ its secure area decrypted, placed in `rom/`.
 
 ## Playing it
 
-Not yet for players: the recompiled game runs from the boot through the
-opening and the title into its first dungeon, headless and checked
-against melonDS; the picture and the sound are next, by eye and by ear.
-To try it (MSYS2's clang, CMake, Ninja and SDL3; `C:\msys64\mingw64\bin`
-on PATH, at run time too):
+Early days: played from a new cartridge through the opening, the
+prologue and the first dungeon, its fights, drops, chests and menus,
+saved and loaded; what lies further is untried. You need Python 3, and
+to build: clang, CMake, Ninja and SDL3 (on Windows, MSYS2's
+`mingw-w64-x86_64` packages), and a GPU with OpenGL 4.5. From the
+repository's root, with your cartridge in `rom/`:
 
 ```sh
 ROM="rom/Lufia - Curse of the Sinistrals (USA).nds"
-python -m ndskit.recomp "$ROM" --out build/recomp        # about 10 minutes
-cmake -S build/recomp -B build/recomp/b -G Ninja -DCMAKE_CXX_COMPILER=clang++ && ninja -C build/recomp/b
+export PATH=/c/msys64/mingw64/bin:$PATH       # Windows: MSYS2's tools, and SDL3.dll at run time
+python -m ndskit.recomp "$ROM" --out build/recomp                    # about 10 minutes
+cmake -S build/recomp -B build/recomp/b -G Ninja -DCMAKE_CXX_COMPILER=clang++
+ninja -C build/recomp/b                                              # a few minutes
 build/recomp/b/ndsrun "$ROM" --window --save-size 65536 --out build/play
 ```
+
+The save (a 512 Kbit EEPROM, hence `--save-size` for a new one) is kept
+in `build/play` and written when the window closes; with a save, the
+game skips its 4-minute opening by itself. The keys are melonDS's
+defaults: X, Z, S, A for A, B, X, Y; Q, W for L, R; Enter and Backspace
+for START and SELECT; the arrows for the D-pad; the left mouse button on
+the lower screen for the stylus; F12 a picture; Escape quits.
 
 ## Layout
 

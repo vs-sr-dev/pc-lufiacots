@@ -107,3 +107,8 @@
   1 856 bytes in the backup's first 2 KiB), the window closed and opened
   again: **LOAD GAME loads it**, and with a save on the cartridge the game
   goes straight to the title, the opening skipped.
+* **Published** (2026-10-11), the user's criterion met ("the picture
+  right, the sound right, the gameplay loop working"): the repository
+  swept (every blob text), a clean recursive clone built and run to the
+  title, `.recomp.json` (playable), ndskit at `5ee24af` with its README,
+  this repository, and pc-moon's and pc-nostalgia's submodule bumps.

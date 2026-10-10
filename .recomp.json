@@ -1,0 +1,11 @@
+{
+  "$schema": "https://recomp.fyi/schema/v1.json",
+  "game": "Lufia: Curse of the Sinistrals",
+  "system": "NDS",
+  "type": "recomp",
+  "toolchain": "ndskit",
+  "status": "playable",
+  "targets": [
+    "Windows"
+  ]
+}
