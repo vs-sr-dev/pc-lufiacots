@@ -27,7 +27,8 @@ What is not known yet, with where to look.
 * **melonDS's 8 KiB save**: melonDS's game list gives this cartridge a
   64 Kbit EEPROM (a 64 KiB file is cut back to 8 KiB). The game plays on
   it through the prologue; whether saving and loading work there, and
-  whether the AP notices, is to try (a save in the first town).
+  whether the AP notices, is to try (a save in the first town). Session 2, on the runtime's 64 KiB
+  backup: a save and LOAD GAME work; the game wrote only its first 2 KiB.
 
 ## The overlays
 

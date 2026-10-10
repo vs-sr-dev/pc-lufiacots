@@ -107,8 +107,8 @@ The keyboard and a gamepad as the DS's buttons, with a gamepad layout
 of an action RPG; what each button does here (attack, jump, the IP
 skills, the party's switch) is to read in play. The soft reset
 (L+R+START+SELECT) kept. The opening (4 min 20 s, unskippable on the DS)
-could be made skippable after a first viewing: a change to the game's
-behaviour, so an option, off by default.
+is already skipped by the game itself once the cartridge holds a save
+(seen in session 2): nothing to add.
 
 ## The phases
 

@@ -21,9 +21,9 @@ followed the opening, the title and the prologue into Soma Temple 1F
    memories there and in Soma Temple. The anti-piracy's checks pass at
    the title as far as memory shows; a sabotage would show later (a door,
    a boss): play on.
-3. **Saving and loading**: a save in the first save point, the backup's
-   bytes against melonDS's (whose file is 8 KiB: check that the game
-   writes inside it), then LOAD GAME.
+3. **Saving and loading**: done by the user (a save, then LOAD GAME after
+   closing the window). Left: whether the game ever writes past the first
+   8 KiB (melonDS's chip size; so far it wrote only the first 2 KiB).
 4. **Discovery's misses** (about 25, interpreted, logged as
    `interpreted (lr ...)`): empty `bx lr` methods in ARM and Thumb,
    getters, thunks reached through pointers (0x0212AFA8/AC,

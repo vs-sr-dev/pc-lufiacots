@@ -102,3 +102,8 @@
   Speakers/Headphones option heard to change the mix even on the PC's
   speakers. The audio queue never ran dry nor was cut (playback ratio
   1.0003); the game wrote its backup memory.
+* **The gameplay loop and the save**, by the user: monsters fought, their
+  drops taken, a chest opened, the menu used; a save made (the game wrote
+  1 856 bytes in the backup's first 2 KiB), the window closed and opened
+  again: **LOAD GAME loads it**, and with a save on the cartridge the game
+  goes straight to the title, the opening skipped.
