@@ -50,3 +50,14 @@ the per-function residency follows the stacks as they are); the voice
 streams heard against melonDS. Its README's known gaps (Huffman, Thumb
 switches, halfword tables, now the interpreter and the overlays) and
 checks are to update at the publication.
+
+## From pc-finalfantasy12revenantwings
+
+Changes of the kit made for the fourth game, Final Fantasy XII: Revenant
+Wings, each checked here as above before it was taken:
+
+| Commit | What | Here |
+|---|---|---|
+| `ad61a11` | a thread switch takes the rest of the CPU's quantum: the other CPU runs before the woken thread (the fourth game's frame start read the ARM7's VBlank count before the ARM7 had stored it, and ran at 60 frames a second instead of 30) | 137 231 vectors, no failure, recompiled and interpreted; the title 12 428 bytes apart from melonDS's state (12 482 before, 12 288 of them the stream's buffer); the route into Soma Temple to frame 22 000, overlays 19, 0 (at 502, then 13 times more), 4, 1 and 4 at the same frames as before but for one |
+
+The submodule is at `ad61a11`.
