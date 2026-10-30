@@ -59,5 +59,6 @@ Wings, each checked here as above before it was taken:
 | Commit | What | Here |
 |---|---|---|
 | `ad61a11` | a thread switch takes the rest of the CPU's quantum: the other CPU runs before the woken thread (the fourth game's frame start read the ARM7's VBlank count before the ARM7 had stored it, and ran at 60 frames a second instead of 30) | 137 231 vectors, no failure, recompiled and interpreted; the title 12 428 bytes apart from melonDS's state (12 482 before, 12 288 of them the stream's buffer); the route into Soma Temple to frame 22 000, overlays 19, 0 (at 502, then 13 times more), 4, 1 and 4 at the same frames as before but for one |
+| `234b110` | the README with its fourth game: pc-finalfantasy12revenantwings in the ports table, the thread switch's rule, its checks and gaps | a README only: nothing to build |
 
-The submodule is at `ad61a11`.
+The submodule is at `234b110`.
